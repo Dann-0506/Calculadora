@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   //Tema Azul
+  /*
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color buttonBackground = Color(0xFFE0F2FF);
   static const Color operatorColor = Color(0xFF007AFF);
   static const Color secondaryColor = Color(0xFFE6E6E6);
   static const Color textColor = Color(0xFF1C1C1E);
+  */
 
   //Tema Verde
-  /*
   static const Color backgroundColor = Color(0xFFFAFAFA);
   static const Color buttonBackground = Color(0xFFD0F0C0);
-  static const Color operatorColor = Color(0xFFD0F0C0);
+  static const Color operatorColor = Color(0xFFDCDCDC);
   static const Color secondaryColor = Color(0xFF2E8B57);
   static const Color textColor = Color(0xFF202124);
-  */
 
   //Tema Amarillo
   /*

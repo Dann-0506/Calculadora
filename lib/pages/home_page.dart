@@ -17,9 +17,9 @@ class _CalculadoraPage extends State<CalculadoraPage> {
   void _onButtonPressed(String value) {
     setState(() {
       _controller.onButtonPressed(value);
+      _controller.updatePreview();
     });
   } 
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +31,32 @@ class _CalculadoraPage extends State<CalculadoraPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              // Display del resultado previo
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: Text(
-                  _controller.expression,
-                  style: const TextStyle(color: AppTheme.textColor, fontSize: 64),
+                  _controller.previewResult,
+                  style: const TextStyle(color: AppTheme.textColor, fontSize: 24),
                   textAlign: TextAlign.right,
                 ),
               ),
+              // Display de la expresión actual
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  reverse: true,
+                  child: SelectableText(
+                    _controller.expression,
+                    style: const TextStyle(color: AppTheme.textColor, fontSize: 64),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ),
               const SizedBox(height: 10),
+              // Botones de la calculadora
               Row(
                 children: [
                   Button(
@@ -131,8 +147,12 @@ class _CalculadoraPage extends State<CalculadoraPage> {
               Row(
                 children: [
                   Button(
+                    value: '⌫',
+                    color: AppTheme.secondaryColor,
+                    onPressed: _onButtonPressed,
+                  ),
+                  Button(
                     value: '0',
-                    isWide: true,
                     onPressed: _onButtonPressed,
                   ),
                   Button(

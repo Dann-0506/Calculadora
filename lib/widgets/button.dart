@@ -8,12 +8,12 @@ class Button extends StatelessWidget {
   final Function(String) onPressed;
 
   const Button({
-    Key? key,
+    super.key,
     required this.value,
     this.color,
     this.isWide = false,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
