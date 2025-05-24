@@ -24,7 +24,7 @@ class CalculatorController {
     }
   }
 
-  // Método para alternar el signo del número actual
+  // Método para alternar el signo de la expresión actual
   void _toggleSign() {
     if (_expression.startsWith('-')) {
       _expression = _expression.substring(1);
@@ -33,34 +33,36 @@ class CalculatorController {
     }
   }
 
+
+  String _preprocessExpression(String expression) {
+    expression = expression.replaceAll('×', '*').replaceAll('÷', '/');
+
+    // Evaluar porcentajes compuestos como "A + B%"
+    expression = expression.replaceAllMapped(
+      RegExp(r'((?:\d+[\*/\-+])*?\d+)\s*([\+\-])\s*(\d+(?:\.\d+)?)%'),
+      (match) {
+        final baseExpr = match.group(1)!;
+        final operator = match.group(2)!;
+        final percent = match.group(3)!;
+
+        return '$baseExpr$operator($baseExpr*$percent/100)';
+      },
+    );
+
+    // Evaluar porcentajes simples como "A%"
+    expression = expression.replaceAllMapped(
+      RegExp(r'(\d+(?:\.\d+)?)%'),
+      (match) => '(${match[1]}/100)',
+    );
+    return expression;
+  }
+
   // Método para evaluar la expresión actual
   void _evaluateExpression() {
     try {
-      String formattedExpression = _expression;
-
-      formattedExpression = formattedExpression.replaceAllMapped(
-        RegExp(r'(\d+(\.\d+)?)(\s*[\+\-]\s*)(\d+(\.\d+)?)%'),
-        (match) {
-          final a = match.group(1);
-          final op = match.group(3);
-          final b = match.group(4);
-
-          return '$a$op($a*$b/100)';
-        },
-      );
-
-      formattedExpression = formattedExpression.replaceAllMapped(
-        RegExp(r'(\d+(\.\d+)?)%'), 
-        (match) => '(${match[1]}/100)',
-      );
-
-      formattedExpression = formattedExpression    
-      .replaceAll('×', '*')
-      .replaceAll('÷', '/');
-
+      final formattedExpression = _preprocessExpression(_expression);
       final result = _safeEval(formattedExpression);
       _expression = result.toString().replaceAll(RegExp(r'\.?0+$'), '');
-      
       _justEvaluated = true;
     } catch (_) {
       _expression = 'Error';
@@ -104,29 +106,8 @@ class CalculatorController {
   // Método para actualizar la vista previa del resultado
   void updatePreview() {
     try {
-      String preview = _expression;
-
-      preview = preview.replaceAllMapped(
-       RegExp(r'(\d+(\.\d+)?)(\s*[\+\-]\s*)(\d+(\.\d+)?)%'),
-        (match) {
-          final a = match.group(1);
-          final op = match.group(3);
-          final b = match.group(4);
-
-          return '$a$op($a*$b/100)';
-        },
-      );
-
-      preview = preview.replaceAllMapped(
-        RegExp(r'(\d+(\.\d+)?)%'),
-        (match) => '(${match[1]}/100)',
-      );
-
-      preview = preview.replaceAll('×', '*').replaceAll('÷', '/');
-
-      final exp = Parser().parse(preview);
-      final result = exp.evaluate(EvaluationType.REAL, ContextModel());
-
+      final preview = _preprocessExpression(_expression);
+      final result = _safeEval(preview);
       previewResult = result.toString().replaceAll(RegExp(r'\.?0+$'), '');
     } catch (_) {
       previewResult = '';

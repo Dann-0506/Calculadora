@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:calculadora/widgets/button.dart';
 import 'package:calculadora/logic/calculator_controller.dart';
-import 'package:calculadora/themes/theme.dart';
 
 class CalculadoraPage extends StatefulWidget {
-  const CalculadoraPage({super.key, required this.title});
   final String title;
+  final void Function(int) onThemeChanged;
+  final int selectedThemeIndex;
+
+  const CalculadoraPage({
+    super.key,
+    required this.title,
+    required this.onThemeChanged, 
+    required this.selectedThemeIndex,
+  });
 
   @override
   State<CalculadoraPage> createState() => _CalculadoraPage();
@@ -13,6 +20,13 @@ class CalculadoraPage extends StatefulWidget {
 
 class _CalculadoraPage extends State<CalculadoraPage> {
   final CalculatorController _controller = CalculatorController();
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedThemeIndex;
+  }
   
   void _onButtonPressed(String value) {
     setState(() {
@@ -24,7 +38,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -37,7 +51,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: Text(
                   _controller.previewResult,
-                  style: const TextStyle(color: AppTheme.textColor, fontSize: 24),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 24),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -50,7 +64,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   reverse: true,
                   child: SelectableText(
                     _controller.expression,
-                    style: const TextStyle(color: AppTheme.textColor, fontSize: 64),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 64),
                     textAlign: TextAlign.right,
                   ),
                 ),
@@ -61,22 +75,22 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 children: [
                   Button(
                     value: 'AC',
-                    color: AppTheme.secondaryColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
-                    value: '+/-',
-                    color: AppTheme.secondaryColor,
+                    value: '⌫',
+                    color: Theme.of(context).colorScheme.secondary,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '%',
-                    color: AppTheme.secondaryColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '÷',
-                    color: AppTheme.operatorColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -97,7 +111,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '×',
-                    color: AppTheme.operatorColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -118,7 +132,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '-',
-                    color: AppTheme.operatorColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -139,7 +153,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '+',
-                    color: AppTheme.operatorColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -147,8 +161,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
               Row(
                 children: [
                   Button(
-                    value: '⌫',
-                    color: AppTheme.secondaryColor,
+                    value: '+/-',
                     onPressed: _onButtonPressed,
                   ),
                   Button(
@@ -161,7 +174,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '=',
-                    color: AppTheme.operatorColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -169,6 +182,19 @@ class _CalculadoraPage extends State<CalculadoraPage> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (int index) {
+          setState(() => _selectedIndex = index);
+          widget.onThemeChanged(index);
+        },
+        destinations: const [
+          NavigationDestination(icon:Icon(Icons.water_drop), label: 'Azul'),
+          NavigationDestination(icon: Icon(Icons.eco), label: 'Verde'),
+          NavigationDestination(icon: Icon(Icons.wb_sunny), label: 'Amarillo'),
+          NavigationDestination(icon: Icon(Icons.brightness_3), label: 'Morado'),
+        ],
       ),
     );
   }
