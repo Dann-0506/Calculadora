@@ -1,3 +1,4 @@
+import 'package:calculadora/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:calculadora/widgets/button.dart';
 import 'package:calculadora/logic/calculator_controller.dart';
@@ -20,12 +21,10 @@ class CalculadoraPage extends StatefulWidget {
 
 class _CalculadoraPage extends State<CalculadoraPage> {
   final CalculatorController _controller = CalculatorController();
-  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.selectedThemeIndex;
   }
   
   void _onButtonPressed(String value) {
@@ -37,8 +36,13 @@ class _CalculadoraPage extends State<CalculadoraPage> {
 
   @override
   Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>()!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text('Calculadora'),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -99,14 +103,17 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 children: [
                   Button(
                     value: '7',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '8',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '9',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
@@ -120,14 +127,17 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 children: [
                   Button(
                     value: '4',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '5',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '6',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
@@ -141,14 +151,17 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 children: [
                   Button(
                     value: '1',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '2',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '3',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
@@ -162,14 +175,17 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 children: [
                   Button(
                     value: '+/-',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '0',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '.',
+                    color: customColors.buttonBackground,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
@@ -182,19 +198,6 @@ class _CalculadoraPage extends State<CalculadoraPage> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (int index) {
-          setState(() => _selectedIndex = index);
-          widget.onThemeChanged(index);
-        },
-        destinations: const [
-          NavigationDestination(icon:Icon(Icons.water_drop), label: 'Azul'),
-          NavigationDestination(icon: Icon(Icons.eco), label: 'Verde'),
-          NavigationDestination(icon: Icon(Icons.wb_sunny), label: 'Amarillo'),
-          NavigationDestination(icon: Icon(Icons.brightness_3), label: 'Morado'),
-        ],
       ),
     );
   }
