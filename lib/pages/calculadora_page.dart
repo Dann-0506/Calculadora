@@ -39,7 +39,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
     final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Calculadora'),
       ),
@@ -79,22 +79,22 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                 children: [
                   Button(
                     value: 'AC',
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: customColors.auxiliaryColor,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '⌫',
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: customColors.auxiliaryColor,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '%',
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: customColors.auxiliaryColor,
                     onPressed: _onButtonPressed,
                   ),
                   Button(
                     value: '÷',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: customColors.operatorColor,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -118,7 +118,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '×',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: customColors.operatorColor,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -142,7 +142,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '-',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: customColors.operatorColor,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -166,7 +166,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '+',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: customColors.operatorColor,
                     onPressed: _onButtonPressed,
                   ),
                 ],
@@ -190,7 +190,7 @@ class _CalculadoraPage extends State<CalculadoraPage> {
                   ),
                   Button(
                     value: '=',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: customColors.operatorColor,
                     onPressed: _onButtonPressed,
                   ),
                 ],

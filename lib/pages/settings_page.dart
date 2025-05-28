@@ -21,10 +21,11 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeNames = isDarkMode ? darkThemes : lightThemes;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Configuración'),
       ),
+      // Crea una lista de temas disponibles
       body: ListView(
         children: [
           const ListTile(
@@ -45,7 +46,6 @@ class SettingsPage extends StatelessWidget {
                   final foreground = theme.colorScheme.onSurface;
                   final auxiliary = theme.colorScheme.secondary;
                   final button = customColors.buttonBackground;
-
                   return GestureDetector(
                     onTap:() => onThemeChanged(index),
                     child: Container(
@@ -74,6 +74,7 @@ class SettingsPage extends StatelessWidget {
               ),
             ),
           ),
+          // Interruptor para el modo oscuro
           SwitchListTile(
             title: Text('Modo oscuro'),
             subtitle: Text(isDarkMode ? 'Activado' : 'Desactivado'),
@@ -81,6 +82,7 @@ class SettingsPage extends StatelessWidget {
             value: isDarkMode,
             onChanged: onDarkModeChanged,
           ),
+          // Información de la aplicación
           const AboutListTile(
             icon: Icon(Icons.info),
             applicationName: 'Calculadora',

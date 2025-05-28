@@ -5,11 +5,13 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color buttonBackground;
   final Color operatorColor;
   final Color textColor;
+  final Color auxiliaryColor;
 
   const CustomColors({
     required this.buttonBackground,
     required this.operatorColor,
     required this.textColor,
+    required this.auxiliaryColor,
   });
 
   @override
@@ -17,11 +19,13 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? buttonBackground,
     Color? operatorColor,
     Color? textColor,
+    Color? auxiliaryColor,
   }) {
     return CustomColors(
       buttonBackground: buttonBackground ?? this.buttonBackground,
       operatorColor: operatorColor ?? this.operatorColor,
       textColor: textColor ?? this.textColor,
+      auxiliaryColor: auxiliaryColor ?? this.auxiliaryColor,
     );
   }
 
@@ -32,6 +36,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
       buttonBackground: Color.lerp(buttonBackground, other.buttonBackground, t)!,
       operatorColor: Color.lerp(operatorColor, other.operatorColor, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,
+      auxiliaryColor: Color.lerp(auxiliaryColor, other.auxiliaryColor, t)!,
     );
   }
 }
@@ -68,9 +73,8 @@ final List<ThemeData> lightThemes = [
 // Definición de los temas personalizados para modo claro
 final ThemeData blueTheme = ThemeData(
   colorScheme: ColorScheme.light(
-    background: Color(0xFFFAFAFA),
-    primary: Color(0xFFE6E6E6),
-    secondary: Color(0xFF007AFF),
+    surface: Color(0xFFFAFAFA),
+    primary: Color(0xFF007AFF),
     onSurface: Color(0xFF1C1C1E),
   ),
   extensions: const [
@@ -78,15 +82,15 @@ final ThemeData blueTheme = ThemeData(
       buttonBackground: Color(0xFFE0F2FF),
       operatorColor: Color(0xFFE6E6E6),
       textColor: Color(0xFF1C1C1E),
+      auxiliaryColor: Color(0xFF007AFF),
     ),
   ],
 );
 
 final ThemeData greenTheme = ThemeData(
   colorScheme: ColorScheme.light(
-    background: Color(0xFFFAFAFA),
-    primary: Color(0xFFDCDCDC),
-    secondary: Color(0xFF2E8B57),
+    surface: Color(0xFFFAFAFA),
+    primary: Color(0xFF2E8B57),
     onSurface: Color(0xFF202124),
   ),
   extensions: const [
@@ -94,15 +98,15 @@ final ThemeData greenTheme = ThemeData(
       buttonBackground: Color(0xFFD0F0C0),
       operatorColor: Color(0xFFDCDCDC),
       textColor: Color(0xFF202124),
+      auxiliaryColor: Color(0xFF2E8B57),
     ),
   ],
 );
 
 final ThemeData yellowTheme = ThemeData(
   colorScheme: ColorScheme.light(
-    background: Color(0xFFFAFAFA),
-    primary: Color(0xFFEDEDED),
-    secondary: Color(0xFFF4C430),
+    surface: Color(0xFFFAFAFA),
+    primary: Color(0xFFF4C430),
     onSurface: Color(0xFF333333),
   ),
   extensions: const [
@@ -110,15 +114,15 @@ final ThemeData yellowTheme = ThemeData(
       buttonBackground: Color(0xFFFFFACD),
       operatorColor: Color(0xFFEDEDED),
       textColor: Color(0xFF333333),
+      auxiliaryColor: Color(0xFFF4C430),
     ),
   ],
 );
 
 final ThemeData purpleTheme = ThemeData(
   colorScheme: ColorScheme.light(
-    background: Color(0xFFFAFAFA),
-    primary: Color(0xFFECECEC),
-    secondary: Color(0xFF7E57C2),
+    surface: Color(0xFFFAFAFA),
+    primary: Color(0xFF7E57C2),
     onSurface: Color(0xFF2C2C2C),
   ),
   extensions: const [
@@ -126,6 +130,7 @@ final ThemeData purpleTheme = ThemeData(
       buttonBackground: Color(0xFFE8E0FF),
       operatorColor: Color(0xFFECECEC),
       textColor: Color(0xFF2C2C2C),
+      auxiliaryColor: Color(0xFF7E57C2),
     ),
   ],
 );
@@ -133,9 +138,8 @@ final ThemeData purpleTheme = ThemeData(
 // Definición de los temas personalizados para modo oscuro
 final ThemeData blueDarkTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
-    background: Colors.black,
-    primary: Colors.white,
-    secondary: Color(0xFF007AFF),
+    surface: Colors.black,
+    primary: Color(0xFF007AFF),
     onSurface: Colors.white,
   ),
   extensions: const [
@@ -143,15 +147,15 @@ final ThemeData blueDarkTheme = ThemeData.dark().copyWith(
       buttonBackground: Color(0xFFE0F2FF),
       operatorColor: Colors.white,
       textColor: Colors.white,
+      auxiliaryColor: Color(0xFF007AFF),
     ),
   ],
 );
 
 final ThemeData greenDarkTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
-    background: Colors.black,
-    primary: Colors.white,
-    secondary: Color(0xFF2E8B57),
+    surface: Colors.black,
+    primary: Color(0xFF2E8B57),
     onSurface: Colors.white,
   ),
   extensions: const [
@@ -159,15 +163,15 @@ final ThemeData greenDarkTheme = ThemeData.dark().copyWith(
       buttonBackground: Color(0xFFD0F0C0),
       operatorColor: Colors.white,
       textColor: Colors.white,
+      auxiliaryColor: Color(0xFF2E8B57),
     ),
   ],
 );
 
 final ThemeData yellowDarkTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
-    background: Colors.black,
-    primary: Colors.white,
-    secondary: Color(0xFFF4C430),
+    surface: Colors.black,
+    primary: Color(0xFFF4C430),
     onSurface: Colors.white,
   ),
   extensions: const [
@@ -175,15 +179,15 @@ final ThemeData yellowDarkTheme = ThemeData.dark().copyWith(
       buttonBackground: Color(0xFFFFFACD),
       operatorColor: Colors.white,
       textColor: Colors.white,
+      auxiliaryColor: Color(0xFFF4C430),
     ),
   ],
 );
 
 final ThemeData purpleDarkTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
-    background: Colors.black,
-    primary: Colors.white,
-    secondary: Color(0xFF7E57C2),
+    surface: Colors.black,
+    primary: Color(0xFF7E57C2),
     onSurface: Colors.white,
   ),
   extensions: const [
@@ -191,6 +195,7 @@ final ThemeData purpleDarkTheme = ThemeData.dark().copyWith(
       buttonBackground: Color(0xFFE8E0FF),
       operatorColor: Colors.white,
       textColor: Colors.white,
+      auxiliaryColor: Color(0xFF7E57C2),
     ),
   ],
 );
