@@ -14,3 +14,12 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+# Proyecto Calculadora para Celular
+
+Se crea un aplicación de Flutter con UI que implementa la funcionalidad de una calculadora básica, con la opción de intercambio de Temas, en navegador aun falta ajustar la posición del teclado.
+## Autor
+
+- [Daniel Landero Arias](l23020770@veracruz.tecnm.mx)
+
