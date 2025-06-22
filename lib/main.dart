@@ -1,8 +1,7 @@
-import 'package:calculadora/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:calculadora/pages/calculadora_page.dart';
-import 'package:calculadora/pages/settings_page.dart';
 import 'package:provider/provider.dart';
+import 'package:calculadora/pages/pages.dart';
+import 'package:calculadora/providers/theme_provider.dart';
 
 //Metodo principal de la aplicación
 void main() {
@@ -52,29 +51,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget page;
-
-    switch (_selectedIndex) {
-        case 0:
-        page = CalculadoraPage();
-        break;
-      case 1:
-        page = SettingsPage();
-        break;
-      default:
-        page = const Center(child: Text('Página no encontrada'));
-    }
-
     return Scaffold(
-      body: SafeArea(child: page),
+      body: SafeArea(
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: appPages,
+        )
+      ),
       bottomNavigationBar: NavigationBar(
         indicatorColor: Theme.of(context).colorScheme.primary,
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onNavTapped,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.calculate), label: 'Modo Básico'),
-          NavigationDestination(icon: Icon(Icons.settings), label: 'Configuración'),
-        ],
+        destinations: appDestinations
       ),
     );
   }
