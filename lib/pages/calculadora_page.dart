@@ -4,16 +4,8 @@ import 'package:calculadora/widgets/button.dart';
 import 'package:calculadora/logic/calculator_controller.dart';
 
 class CalculadoraPage extends StatefulWidget {
-  final String title;
-  final void Function(int) onThemeChanged;
-  final int selectedThemeIndex;
 
-  const CalculadoraPage({
-    super.key,
-    required this.title,
-    required this.onThemeChanged, 
-    required this.selectedThemeIndex,
-  });
+  const CalculadoraPage({super.key,});
 
   @override
   State<CalculadoraPage> createState() => _CalculadoraPage();
