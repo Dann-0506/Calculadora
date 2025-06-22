@@ -1,31 +1,24 @@
+import 'package:calculadora/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:calculadora/themes/theme.dart';
+import 'package:provider/provider.dart';
+import 'package:calculadora/widgets/preview_button.dart';
+
 
 class SettingsPage extends StatelessWidget {
-  final String title;
-  final int selectedThemeIndex;
-  final void Function(int) onThemeChanged;
-  final bool isDarkMode;
-  final void Function(bool) onDarkModeChanged;
-
-  const SettingsPage({
-    super.key,
-    required this.title,
-    required this.selectedThemeIndex,
-    required this.onThemeChanged,
-    required this.isDarkMode,
-    required this.onDarkModeChanged,
-  });
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeNames = isDarkMode ? darkThemes : lightThemes;
+    final themeProvider = context.watch<ThemeProvider>();
+    final themeState = themeProvider.themeState;
+    final themeNames = themeState.isDarkMode ? darkThemes : lightThemes;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Configuración'),
       ),
-      // Crea una lista de temas disponibles
       body: ListView(
         children: [
           const ListTile(
@@ -33,68 +26,117 @@ class SettingsPage extends StatelessWidget {
             title: Text('Elegir tema'),
             subtitle: Text('Selecciona entre los temas disponibles'),
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child:Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: List.generate(themeNames.length, (index) {
-                  final theme = themeNames[index];
-                  final customColors = theme.extension<CustomColors>()!;
-                  final background = theme.colorScheme.background;
-                  final foreground = theme.colorScheme.onSurface;
-                  final auxiliary = theme.colorScheme.secondary;
-                  final button = customColors.buttonBackground;
-                  return GestureDetector(
-                    onTap:() => onThemeChanged(index),
-                    child: Container(
-                      width: 200,
-                      height: 80,
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: selectedThemeIndex == index ? theme.colorScheme.secondary : Colors.grey,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        color: background,
+          // Vista previa de temas
+          SizedBox(
+            height: 140,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: themeNames.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 12),
+              itemBuilder: (context, index) {
+                final theme = themeNames[index];
+                final customColors = theme.extension<CustomColors>()!;
+                final background = theme.colorScheme.surface;
+                final auxiliary = customColors.auxiliaryColor;
+                final button = customColors.buttonBackground;
+                final operator = customColors.operatorColor;
+                final text = customColors.textColor;
+
+                return GestureDetector(
+                  onTap: () {
+                    themeProvider.setThemeIndex(index);
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: 120,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: themeState.selectedThemeIndex == index ? auxiliary : Colors.grey,
+                        width: themeState.selectedThemeIndex == index ? 3 : 1,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(height: 10, width: 100, color: button),
-                          Container(height: 10, width: 100, color: auxiliary),
-                          Container(height: 10, width: 100, color: foreground),
-                        ],
-                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      color: background,
+                      boxShadow: themeState.selectedThemeIndex == index
+                          ? [BoxShadow(color: auxiliary.withOpacity(0.2), blurRadius: 8)]
+                          : [],
                     ),
-                  );
-                }),
-              ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Simulación de pantalla de calculadora
+                        Container(
+                          height: 24,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            '123+456',
+                            style: TextStyle(
+                              color: text,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        // Simulación de botones
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            PreviewButton(value: '7', color: button),
+                            PreviewButton(value: '+', color: operator),
+                            PreviewButton(value: '=', color: auxiliary)
+                          ],
+                        ),
+                        // Nombre del tema
+                        Text(
+                          _themeName(index),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: auxiliary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
-          // Interruptor para el modo oscuro
           SwitchListTile(
-            title: Text('Modo oscuro'),
-            subtitle: Text(isDarkMode ? 'Activado' : 'Desactivado'),
-            secondary: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
-            value: isDarkMode,
-            onChanged: onDarkModeChanged,
+            title: const Text('Modo oscuro'),
+            subtitle: Text(themeState.isDarkMode ? 'Activado' : 'Desactivado'),
+            secondary: Icon(themeState.isDarkMode ? Icons.dark_mode : Icons.light_mode),
+            value: themeState.isDarkMode,
+            onChanged: (isDark) {
+              themeProvider.setDarkMode(isDark);
+            },
           ),
-          // Información de la aplicación
           const AboutListTile(
             icon: Icon(Icons.info),
             applicationName: 'Calculadora',
             applicationVersion: '1.0.0',
             applicationIcon: Icon(Icons.calculate),
             aboutBoxChildren: [
-              Text('Desarrollado por Daniel Landero Arias.'),
               Text('Esta aplicación fue creada como un proyecto de aprendizaje.'),
             ],
           ),
         ],
       ),
     );
+  }
+
+  String _themeName(int index) {
+    switch (index) {
+      case 0: return 'Azul';
+      case 1: return 'Verde';
+      case 2: return 'Amarillo';
+      case 3: return 'Morado';
+      default: return 'Tema';
+    }
   }
 }
