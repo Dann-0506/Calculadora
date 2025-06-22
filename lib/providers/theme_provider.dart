@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:calculadora/logic/theme_logic.dart';
+import 'package:calculadora/logic/theme_state.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeState _themeState = ThemeState(

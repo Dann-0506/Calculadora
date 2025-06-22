@@ -93,7 +93,7 @@ class SettingsPage extends StatelessWidget {
                         ),
                         // Nombre del tema
                         Text(
-                          _themeName(index),
+                          themesNames[index],
                           style: TextStyle(
                             fontSize: 12,
                             color: auxiliary,
@@ -128,15 +128,5 @@ class SettingsPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _themeName(int index) {
-    switch (index) {
-      case 0: return 'Azul';
-      case 1: return 'Verde';
-      case 2: return 'Amarillo';
-      case 3: return 'Morado';
-      default: return 'Tema';
-    }
   }
 }

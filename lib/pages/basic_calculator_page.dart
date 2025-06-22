@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:calculadora/widgets/button.dart';
 import 'package:calculadora/logic/calculator_controller.dart';
 
-class CalculadoraPage extends StatefulWidget {
+class BasicCalculatorPage extends StatefulWidget {
 
-  const CalculadoraPage({super.key,});
+  const BasicCalculatorPage({super.key,});
 
   @override
-  State<CalculadoraPage> createState() => _CalculadoraPage();
+  State<BasicCalculatorPage> createState() => _CalculadoraPage();
 }
 
-class _CalculadoraPage extends State<CalculadoraPage> {
+class _CalculadoraPage extends State<BasicCalculatorPage> {
   final CalculatorController _controller = CalculatorController();
 
   @override
