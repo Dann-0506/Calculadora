@@ -1,25 +1,38 @@
-# calculadora
+# Calculadora Multi-Función (Flutter)
 
-A new Flutter project.
+Este proyecto representa uno de mis primeros acercamientos al desarrollo multiplataforma utilizando **Flutter**. Fue concebido como un proyecto práctico para consolidar conceptos fundamentales de diseño de interfaces de usuario y gestión de estado. 
 
-## Getting Started
+A pesar de ser un desarrollo temprano, la aplicación cuenta con una arquitectura organizada, separando la lógica de la interfaz y permitiendo una base escalable.
 
-This project is a starting point for a Flutter application.
+## Características Implementadas
 
-A few resources to get you started if this is your first Flutter project:
+La aplicación no se limita a operaciones básicas, sino que incorpora distintos módulos funcionales:
+*   **Calculadora Básica y Científica:** Dos modos de operación separados para cálculos cotidianos y avanzados[cite: 4].
+*   **Conversor de Unidades:** Una herramienta extra para transformaciones rápidas[cite: 4].
+*   **Historial de Operaciones:** Un registro que permite revisar los cálculos realizados anteriormente[cite: 4].
+*   **Soporte Multi-Tema:** Implementación nativa de temas claro y oscuro (`light_themes.dart`, `dark_themes.dart`) adaptables desde la configuración[cite: 4].
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tecnologías y Estructura
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*   **Framework:** [Flutter](https://flutter.dev/) / Dart[cite: 4].
+*   **Gestión de Estado:** Utilización de controladores (`calculator_controller.dart`) y Providers (`theme_provider.dart`) para separar la lógica matemática y visual de la capa de UI[cite: 4].
+*   **Diseño Modular:** El código fuente está estructurado en carpetas lógicas: `pages/`, `widgets/`, `logic/`, `themes/` y `providers/`[cite: 4].
 
+## Instalación y Ejecución
 
-# Proyecto Calculadora para Celular
+Para correr este proyecto en tu entorno local, asegúrate de tener el SDK de Flutter instalado.
 
-Se crea un aplicación de Flutter con UI que implementa la funcionalidad de una calculadora básica, con la opción de intercambio de Temas, en navegador aun falta ajustar la posición del teclado.
-## Autor
-
-- [Daniel Landero Arias](l23020770@veracruz.tecnm.mx)
-
+1. Clona este repositorio:
+   ```bash
+   git clone [https://github.com/tu-usuario/tu-repo-calculadora.git](https://github.com/tu-usuario/tu-repo-calculadora.git)
+   ```
+2. Instala las dependencias necesarias:
+   ```bash
+   flutter pub get
+   ```
+4. Ejecuta la aplicación en tu emulador o dispositivo físico:
+   ```bash
+   flutter run
+   ```
+## Capturas de Pantalla
+  WIP
