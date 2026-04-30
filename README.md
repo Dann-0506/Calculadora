@@ -7,16 +7,16 @@ A pesar de ser un desarrollo temprano, la aplicación cuenta con una arquitectur
 ## Características Implementadas
 
 La aplicación no se limita a operaciones básicas, sino que incorpora distintos módulos funcionales:
-*   **Calculadora Básica y Científica:** Dos modos de operación separados para cálculos cotidianos y avanzados[cite: 4].
-*   **Conversor de Unidades:** Una herramienta extra para transformaciones rápidas[cite: 4].
-*   **Historial de Operaciones:** Un registro que permite revisar los cálculos realizados anteriormente[cite: 4].
-*   **Soporte Multi-Tema:** Implementación nativa de temas claro y oscuro (`light_themes.dart`, `dark_themes.dart`) adaptables desde la configuración[cite: 4].
+*   **Calculadora Básica y Científica:** Dos modos de operación separados para cálculos cotidianos y avanzados.
+*   **Conversor de Unidades:** Una herramienta extra para transformaciones rápidas.
+*   **Historial de Operaciones:** Un registro que permite revisar los cálculos realizados anteriormente.
+*   **Soporte Multi-Tema:** Implementación nativa de temas claro y oscuro (`light_themes.dart`, `dark_themes.dart`) adaptables desde la configuración.
 
 ## Tecnologías y Estructura
 
-*   **Framework:** [Flutter](https://flutter.dev/) / Dart[cite: 4].
-*   **Gestión de Estado:** Utilización de controladores (`calculator_controller.dart`) y Providers (`theme_provider.dart`) para separar la lógica matemática y visual de la capa de UI[cite: 4].
-*   **Diseño Modular:** El código fuente está estructurado en carpetas lógicas: `pages/`, `widgets/`, `logic/`, `themes/` y `providers/`[cite: 4].
+*   **Framework:** [Flutter](https://flutter.dev/) / Dart.
+*   **Gestión de Estado:** Utilización de controladores (`calculator_controller.dart`) y Providers (`theme_provider.dart`) para separar la lógica matemática y visual de la capa de UI.
+*   **Diseño Modular:** El código fuente está estructurado en carpetas lógicas: `pages/`, `widgets/`, `logic/`, `themes/` y `providers/`.
 
 ## Instalación y Ejecución
 
