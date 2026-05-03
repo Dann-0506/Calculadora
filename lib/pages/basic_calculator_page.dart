@@ -4,8 +4,7 @@ import 'package:calculadora/widgets/button.dart';
 import 'package:calculadora/logic/calculator_controller.dart';
 
 class BasicCalculatorPage extends StatefulWidget {
-
-  const BasicCalculatorPage({super.key,});
+  const BasicCalculatorPage({super.key});
 
   @override
   State<BasicCalculatorPage> createState() => _CalculadoraPage();
@@ -18,13 +17,13 @@ class _CalculadoraPage extends State<BasicCalculatorPage> {
   void initState() {
     super.initState();
   }
-  
+
   void _onButtonPressed(String value) {
     setState(() {
       _controller.onButtonPressed(value);
       _controller.updatePreview();
     });
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +31,7 @@ class _CalculadoraPage extends State<BasicCalculatorPage> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(
-        title: const Text('Calculadora'),
-      ),
+      appBar: AppBar(title: const Text('Calculadora')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -44,23 +41,35 @@ class _CalculadoraPage extends State<BasicCalculatorPage> {
               // Display del resultado previo
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 child: Text(
                   _controller.previewResult,
-                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 24),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontSize: 24,
+                  ),
                   textAlign: TextAlign.right,
                 ),
               ),
               // Display de la expresión actual
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 24,
+                ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   reverse: true,
                   child: SelectableText(
                     _controller.expression,
-                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 64),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize: 64,
+                    ),
                     textAlign: TextAlign.right,
                   ),
                 ),

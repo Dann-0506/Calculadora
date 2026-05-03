@@ -9,14 +9,14 @@ void main() {
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
       child: const MyApp(),
-    )
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-// Construye la aplicación principal
+  // Construye la aplicación principal
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -42,7 +42,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-// Cambia la página seleccionada en la barra de navegación
+  // Cambia la página seleccionada en la barra de navegación
   void _onNavTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -53,16 +53,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: IndexedStack(
-          index: _selectedIndex,
-          children: appPages,
-        )
+        child: IndexedStack(index: _selectedIndex, children: appPages),
       ),
       bottomNavigationBar: NavigationBar(
         indicatorColor: Theme.of(context).colorScheme.primary,
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onNavTapped,
-        destinations: appDestinations
+        destinations: appDestinations,
       ),
     );
   }
