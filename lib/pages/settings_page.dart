@@ -4,7 +4,6 @@ import 'package:calculadora/themes/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:calculadora/widgets/preview_button.dart';
 
-
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -16,9 +15,7 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(
-        title: const Text('Configuración'),
-      ),
+      appBar: AppBar(title: const Text('Configuración')),
       body: ListView(
         children: [
           const ListTile(
@@ -53,14 +50,23 @@ class SettingsPage extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: themeState.selectedThemeIndex == index ? auxiliary : Colors.grey,
+                        color:
+                            themeState.selectedThemeIndex == index
+                                ? auxiliary
+                                : Colors.grey,
                         width: themeState.selectedThemeIndex == index ? 3 : 1,
                       ),
                       borderRadius: BorderRadius.circular(12),
                       color: background,
-                      boxShadow: themeState.selectedThemeIndex == index
-                          ? [BoxShadow(color: auxiliary.withOpacity(0.2), blurRadius: 8)]
-                          : [],
+                      boxShadow:
+                          themeState.selectedThemeIndex == index
+                              ? [
+                                BoxShadow(
+                                  color: auxiliary.withValues(alpha: 0.2),
+                                  blurRadius: 8,
+                                ),
+                              ]
+                              : [],
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +94,7 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             PreviewButton(value: '7', color: button),
                             PreviewButton(value: '+', color: operator),
-                            PreviewButton(value: '=', color: auxiliary)
+                            PreviewButton(value: '=', color: auxiliary),
                           ],
                         ),
                         // Nombre del tema
@@ -110,7 +116,9 @@ class SettingsPage extends StatelessWidget {
           SwitchListTile(
             title: const Text('Modo oscuro'),
             subtitle: Text(themeState.isDarkMode ? 'Activado' : 'Desactivado'),
-            secondary: Icon(themeState.isDarkMode ? Icons.dark_mode : Icons.light_mode),
+            secondary: Icon(
+              themeState.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+            ),
             value: themeState.isDarkMode,
             onChanged: (isDark) {
               themeProvider.setDarkMode(isDark);
@@ -122,7 +130,9 @@ class SettingsPage extends StatelessWidget {
             applicationVersion: '1.0.0',
             applicationIcon: Icon(Icons.calculate),
             aboutBoxChildren: [
-              Text('Esta aplicación fue creada como un proyecto de aprendizaje.'),
+              Text(
+                'Esta aplicación fue creada como un proyecto de aprendizaje.',
+              ),
             ],
           ),
         ],
