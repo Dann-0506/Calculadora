@@ -13,7 +13,7 @@ class CalculatorController {
       _reset();
     } else if (value == '+/-') {
       _toggleSign();
-    } else if (value == '⌫'){
+    } else if (value == '⌫') {
       _deleteLast();
     } else if (value == '%') {
       _appendValue('%');
@@ -32,7 +32,6 @@ class CalculatorController {
       _expression = '-$_expression';
     }
   }
-
 
   String _preprocessExpression(String expression) {
     expression = expression.replaceAll('×', '*').replaceAll('÷', '/');
@@ -71,7 +70,9 @@ class CalculatorController {
 
   // Método para agregar un valor a la expresión actual
   void _appendValue(String value) {
-    if (_justEvaluated && RegExp(r'\d').hasMatch(value)||_expression == '0' || _expression == 'Error') {
+    if (_justEvaluated && RegExp(r'\d').hasMatch(value) ||
+        _expression == '0' ||
+        _expression == 'Error') {
       _expression = value;
     } else {
       _expression += value;
@@ -82,7 +83,7 @@ class CalculatorController {
   // Método para evaluar la expresión con math_expressions
   double _safeEval(String expression) {
     try {
-      Parser p = Parser();
+      GrammarParser p = GrammarParser();
       Expression exp = p.parse(expression);
       ContextModel cm = ContextModel();
       return exp.evaluate(EvaluationType.REAL, cm);
